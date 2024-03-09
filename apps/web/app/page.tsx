@@ -1,12 +1,31 @@
-import Image from "next/image";
-import { Card } from "@repo/ui/card";
-import { Code } from "@repo/ui/code";
-import { Button } from "@repo/ui/button";
+import { redirect } from "next/navigation";
+import { getSession, login, logout } from "../lib";
 
-export default function Page(): JSX.Element {
+export default async function Page() {
+  const session = await getSession();
   return (
-    <main className="bg-slate-900 flex items-center justify-center h-screen text-4xl text-cyan-50">
-      This is Home Page of Dischord app !!!
-    </main>
+    <section>
+      <form
+        action={async (formData) => {
+          "use server";
+          await login(formData);
+          redirect("/");
+        }}
+      >
+        <input type="email" placeholder="Email" />
+        <br />
+        <button type="submit">Login</button>
+      </form>
+      <form
+        action={async () => {
+          "use server";
+          await logout();
+          redirect("/");
+        }}
+      >
+        <button type="submit">Logout</button>
+      </form>
+      <pre>{JSON.stringify(session, null, 2)}</pre>
+    </section>
   );
 }
