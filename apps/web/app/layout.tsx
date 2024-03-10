@@ -16,7 +16,7 @@ export default function RootLayout({
 }): JSX.Element {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="bg-slate-900 text-white">{children}</body>
     </html>
   );
 }
