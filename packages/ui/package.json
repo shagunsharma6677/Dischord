@@ -4,7 +4,7 @@
   "private": true,
   "exports": {
     ".": "./src/index.tsx",
-    "./lib/utils":"./src/lib/utils",
+    "./src/lib/utils": "./src/lib/utils",
     "./styles/shared-globals.css": "./src/styles/shared-globals.css"
   },
   "scripts": {
