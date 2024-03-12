@@ -2,5 +2,11 @@
   "name": "@repo/tailwing-config",
   "version": "0.0.0",
   "private": true,
-  "files":["tailwing.config.js"]
+  "files": [
+    "tailwing.config.js"
+  ],
+  "dependencies": {
+    "tailwindcss": "^3.4.1",
+    "tailwindcss-animate": "^1.0.7"
+  }
 }
