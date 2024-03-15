@@ -28,6 +28,9 @@
     "eslint": "^8.56.0",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "zod":"link:../../packages/ui/node_modules/zod",
+    "react-hook-form":"link:../../packages/ui/node_modules/react-hook-form",
+    "@hookform":"link:../../packages/ui/node_modules/@hookform"
   }
 }
