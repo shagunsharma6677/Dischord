@@ -121,6 +121,9 @@ importers:
       eslint:
         specifier: ^8.56.0
         version: 8.56.0
+      lucide-react:
+        specifier: link:../../packages/ui/node_modules/lucide-react
+        version: link:../../packages/ui/node_modules/lucide-react
       postcss:
         specifier: ^8.4.35
         version: 8.4.35

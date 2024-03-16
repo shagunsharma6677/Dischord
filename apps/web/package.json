@@ -31,6 +31,7 @@
     "typescript": "^5.3.3",
     "zod":"link:../../packages/ui/node_modules/zod",
     "react-hook-form":"link:../../packages/ui/node_modules/react-hook-form",
-    "@hookform":"link:../../packages/ui/node_modules/@hookform"
+    "@hookform":"link:../../packages/ui/node_modules/@hookform",
+    "lucide-react":"link:../../packages/ui/node_modules/lucide-react"
   }
 }

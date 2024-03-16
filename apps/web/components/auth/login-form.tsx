@@ -15,6 +15,8 @@ import {
   Input,
 } from "@repo/ui";
 import { LoginSchema } from "../../schemas";
+import { FormError } from "../form-error";
+import { FormSuccess } from "../form-success";
 
 export const LoginForm = () => {
   const form = useForm<z.infer<typeof LoginSchema>>({
@@ -70,6 +72,8 @@ export const LoginForm = () => {
               )}
             />
           </div>
+          <FormError message="Invalid Credential !!"/>
+          <FormSuccess message="Email Send !"/>
           <Button type="submit" className="w-full ">
             Login
           </Button>
