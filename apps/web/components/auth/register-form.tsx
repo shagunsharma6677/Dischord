@@ -14,51 +14,58 @@ import {
   FormMessage,
   Input,
 } from "@repo/ui";
-import { LoginSchema } from "../../schemas";
+import { RegisterSchema } from "../../schemas";
 import { FormError } from "../form-error";
 import { FormSuccess } from "../form-success";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export const LoginForm = () => {
-  const form = useForm<z.infer<typeof LoginSchema>>({
-    resolver: zodResolver(LoginSchema),
+export const RegisterForm = () => {
+  const form = useForm<z.infer<typeof RegisterSchema>>({
+    resolver: zodResolver(RegisterSchema),
     defaultValues: {
       email: "",
       password: "",
+      name: "",
     },
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const router = useRouter();
 
-  const onSubmit = async (formData: z.infer<typeof LoginSchema>) => {
+  const onSubmit = async (formData: z.infer<typeof RegisterSchema>) => {
     console.log("formData", formData);
     setErrorMessage("");
-    setSuccessMessage("")
 
-    const res = await fetch("/api/auth/Users/login", {
-      method: "POST",
-      body: JSON.stringify({ ...formData }),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-   
-    if (!res.ok) {
-      const response = await res.json();
-      setErrorMessage(response.message);
-    } else {
-      const response = await res.json();
-      setSuccessMessage(response.message);
-      router.push("/");
+    try {
+      const res = await fetch("/api/auth/Users/register", {
+        method: "POST",
+        body: JSON.stringify({ ...formData }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!res.ok) {
+        const response = await res.json();
+        setErrorMessage(response.message);
+      } else {
+        router.refresh();
+        router.push("/");
+      }
+    } catch (error) {
+      console.error("Error registering user:", error);
+      setErrorMessage(
+        "An error occurred while registering. Please try again later."
+      );
     }
   };
+
   return (
     <CardWrapper
-      headerLabel="Welcome back! 🎉 Happy to see you again!"
-      backButtonLabel="Dont have an account ??"
-      backButtonHref="/auth/register"
+      headerLabel="Create an account! 🎉"
+      backButtonLabel="Already have an account ??"
+      backButtonHref="/auth/login"
       showSocial
     >
       <Form {...form}>
@@ -95,11 +102,26 @@ export const LoginForm = () => {
                 </FormItem>
               )}
             />
+
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input {...field} placeholder="Username" type="text" />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </div>
           {errorMessage && <FormError message={errorMessage} />}
           {successMessage && <FormSuccess message={successMessage} />}
+
           <Button type="submit" className="w-full ">
-            Login
+            Create an account
           </Button>
         </form>
       </Form>
