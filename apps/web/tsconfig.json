@@ -5,7 +5,9 @@
       {
         "name": "next"
       }
-    ]
+    ],
+    "declaration": true, // Ensure declaration is set to true
+    "declarationMap": true // Set declarationMap
   },
   "include": [
     "next-env.d.ts",
@@ -13,7 +15,9 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "auth.ts"
-, "app/api/auth/[...nextauth]/route.js", "app/api/auth/[...nextauth]/options.js"  ],
+    "auth.ts",
+    "app/api/auth/[...nextauth]/route.js",
+    "app/api/auth/[...nextauth]/options.js"
+  ],
   "exclude": ["node_modules"]
 }

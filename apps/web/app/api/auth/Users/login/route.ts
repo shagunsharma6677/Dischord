@@ -4,6 +4,7 @@ import { LoginSchema } from "../../../../../schemas/index"; // Assuming this is 
 import UserModel from "../../../../(models)/User";
 import connectMongo from "../../../../../utils/db";
 
+
 export async function POST(request: Request) {
   try {
     await connectMongo();

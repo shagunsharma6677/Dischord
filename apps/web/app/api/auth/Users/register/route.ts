@@ -4,6 +4,7 @@ import bcryptjs from "bcryptjs";
 import connectMongo from "../../../../../utils/db";
 import UserModel from "../../../../(models)/User";
 
+
 export async function POST(request: Request) {
   try {
     await connectMongo();
