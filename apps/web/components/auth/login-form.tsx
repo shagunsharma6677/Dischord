@@ -35,7 +35,7 @@ export const LoginForm = () => {
   const onSubmit = async (formData: z.infer<typeof LoginSchema>) => {
     console.log("formData", formData);
     setErrorMessage("");
-    setSuccessMessage("")
+    setSuccessMessage("");
 
     const res = await fetch("/api/auth/Users/login", {
       method: "POST",
@@ -44,14 +44,15 @@ export const LoginForm = () => {
         "Content-Type": "application/json",
       },
     });
-   
+
     if (!res.ok) {
       const response = await res.json();
       setErrorMessage(response.message);
     } else {
       const response = await res.json();
+
       setSuccessMessage(response.message);
-      router.push("/");
+      // router.push("/");
     }
   };
   return (

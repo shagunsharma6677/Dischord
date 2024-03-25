@@ -1,13 +1,16 @@
 import { NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
-import { LoginSchema } from "../../../../../schemas/index"; // Assuming this is the correct path to your LoginSchema
-import UserModel from "../../../../(models)/User";
-import connectMongo from "../../../../../utils/db";
+import { LoginSchema } from "../../../../../schemas/index";
+import clientPromise from "../../../../../utils/db";
+import { findByEmail } from "../../../../../utils/dbUtils";
 
 
 export async function POST(request: Request) {
   try {
-    await connectMongo();
+    const client = await clientPromise;
+    // Access a specific database and collection
+    const db = client.db("dischord");
+    const collection = db.collection("users");
     const body = await request.json();
 
     // Validate incoming data against LoginSchema
@@ -23,7 +26,7 @@ export async function POST(request: Request) {
     const { email, password } = validationResult.data;
 
     // Find user by email
-    const user = await UserModel.findOne({ email }).lean().exec();
+    const user = await findByEmail(collection, email);
     if (!user) {
       return NextResponse.json(
         { message: "User not found !" },
@@ -44,11 +47,14 @@ export async function POST(request: Request) {
     // Here you can generate a token, set cookies, or any other login-related logic
 
     return NextResponse.json(
-      { message: "Login successful !!" },
+      { message: "Login successful !!!" },
       { status: 200 }
     );
   } catch (error) {
     console.log(error);
-    return NextResponse.json({ message: "Something went wrong !" }, { status: 500 });
+    return NextResponse.json(
+      { message: "Something went wrong !" },
+      { status: 500 }
+    );
   }
 }

@@ -35,6 +35,7 @@ export const RegisterForm = () => {
   const onSubmit = async (formData: z.infer<typeof RegisterSchema>) => {
     console.log("formData", formData);
     setErrorMessage("");
+    setSuccessMessage("");
 
     try {
       const res = await fetch("/api/auth/Users/register", {

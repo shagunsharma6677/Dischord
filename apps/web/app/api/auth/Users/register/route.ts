@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
 import { RegisterSchema } from "../../../../../schemas/index";
 import bcryptjs from "bcryptjs";
-import connectMongo from "../../../../../utils/db";
-import UserModel from "../../../../(models)/User";
-
+import clientPromise from "../../../../../utils/db";
+import { findByEmail } from "../../../../../utils/dbUtils";
 
 export async function POST(request: Request) {
   try {
-    await connectMongo();
+    const client = await clientPromise;
+    // Access a specific database and collection
+    const db = client.db("dischord");
+    const collection = db.collection("users");
     const body = await request.json();
 
     // Validate incoming data against RegisterSchema
@@ -21,21 +23,26 @@ export async function POST(request: Request) {
     const { email, password, name } = validationResult.data;
 
     // Check for duplicate emails
-    const duplicate = await UserModel.findOne({ email }).lean().exec();
+    const duplicate = await findByEmail(collection, email);
     if (duplicate) {
-      return NextResponse.json({ message: "Duplicate Email !" }, { status: 409 });
+      return NextResponse.json(
+        { message: "Duplicate Email !" },
+        { status: 409 }
+      );
     }
 
     // Hash password
     const hashPassword = await bcryptjs.hash(password, 10);
 
     // Create user
-    await UserModel.create({ email, password: hashPassword, name });
-  
+    await collection.insertOne({ email, password: hashPassword, name });
 
     return NextResponse.json({ message: "User Created !!" }, { status: 201 });
   } catch (error) {
     console.log("error", error);
-    return NextResponse.json({ message: "Something went wrong !", error }, { status: 500 });
+    return NextResponse.json(
+      { message: "Something went wrong !", error },
+      { status: 500 }
+    );
   }
 }
