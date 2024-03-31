@@ -1,16 +1,12 @@
 import { NextResponse } from "next/server";
 import bcryptjs from "bcryptjs";
 import { LoginSchema } from "../../../../../schemas/index";
-import clientPromise from "../../../../../utils/db";
-import { findByEmail } from "../../../../../utils/dbUtils";
-
+import { findByEmail } from "../../../../../lib/utils";
+import { signIn } from "../../../../../auth";
+import { DEFAULT_LOGIN_REDIRECT } from "../../../../../routes";
 
 export async function POST(request: Request) {
   try {
-    const client = await clientPromise;
-    // Access a specific database and collection
-    const db = client.db("dischord");
-    const collection = db.collection("users");
     const body = await request.json();
 
     // Validate incoming data against LoginSchema
@@ -26,16 +22,18 @@ export async function POST(request: Request) {
     const { email, password } = validationResult.data;
 
     // Find user by email
-    const user = await findByEmail(collection, email);
-    if (!user) {
+    const existingUser = await findByEmail(email);
+    if (!existingUser || !existingUser.email || !existingUser.password) {
       return NextResponse.json(
         { message: "User not found !" },
         { status: 404 }
       );
     }
-
     // Compare passwords
-    const passwordMatch = await bcryptjs.compare(password, user.password);
+    const passwordMatch = await bcryptjs.compare(
+      password,
+      existingUser.password
+    );
     if (!passwordMatch) {
       return NextResponse.json(
         { message: "Invalid password !" },
@@ -43,8 +41,11 @@ export async function POST(request: Request) {
       );
     }
 
-    // Passwords match, login successful
-    // Here you can generate a token, set cookies, or any other login-related logic
+    await signIn("credentials", {
+      email,
+      password,
+      redirect: DEFAULT_LOGIN_REDIRECT
+    });
 
     return NextResponse.json(
       { message: "Login successful !!!" },

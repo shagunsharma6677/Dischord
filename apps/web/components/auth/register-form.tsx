@@ -46,6 +46,8 @@ export const RegisterForm = () => {
         },
       });
 
+      console.log("regRes", res)
+
       if (!res.ok) {
         const response = await res.json();
         setErrorMessage(response.message);
