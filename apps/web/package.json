@@ -9,12 +9,10 @@
     "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
-    "@auth/core": "^0.28.0",
-    "@auth/mongodb-adapter": "^2.5.0",
-    "@repo/ui": "workspace:*",
+    "@auth/prisma-adapter": "^1.5.1",
+    "@prisma/client": "^5.11.0",
     "@types/bcryptjs": "^2.4.6",
     "bcryptjs": "^2.4.3",
-    "mongodb": "^6.5.0",
     "next": "^14.0.4",
     "next-auth": "5.0.0-beta.15",
     "react": "^18.2.0",
@@ -27,6 +25,7 @@
     "@repo/eslint-config": "workspace:*",
     "@repo/tailwing-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
+    "@repo/ui": "workspace:*",
     "@types/eslint": "^8.56.1",
     "@types/node": "^20.10.6",
     "@types/react": "^18.2.46",
@@ -35,10 +34,10 @@
     "eslint": "^8.56.0",
     "lucide-react": "link:../../packages/ui/node_modules/lucide-react",
     "postcss": "^8.4.35",
+    "prisma": "^5.11.0",
     "react-hook-form": "link:../../packages/ui/node_modules/react-hook-form",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3",
     "zod": "link:../../packages/ui/node_modules/zod"
   }
- 
 }
