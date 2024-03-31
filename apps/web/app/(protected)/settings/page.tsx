@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const SettingPage = () => {
   return (
-    <div>settingPage</div>
-  )
-}
+    <>
+      <div>status</div>
+    </>
+  );
+};
 
-export default SettingPage
+export default SettingPage;
