@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 import { RegisterSchema } from "../../../../../schemas/index";
 import bcryptjs from "bcryptjs";
-import { addUser, findByEmail } from "../../../../../lib/utils";
+import { addUser, findByEmail } from "../../../../../data/user";
+import { generateVerificationToken } from "../../../../../lib/tokens";
+import { sendVerificationEmail } from "../../../../../lib/mail";
 
 export async function POST(request: Request) {
   try {
@@ -19,9 +21,9 @@ export async function POST(request: Request) {
 
     // Check for duplicate emails
     const duplicate = await findByEmail(email);
-     if (duplicate) {
+    if (duplicate) {
       return NextResponse.json(
-        { message: "Duplicate Email !" },
+        { message: "Email already in use!" },
         { status: 409 }
       );
     }
@@ -30,9 +32,18 @@ export async function POST(request: Request) {
     const hashPassword = await bcryptjs.hash(password, 10);
 
     // Create user
-    const user = await addUser({email, password:hashPassword, name})
+    await addUser({ email, password: hashPassword, name });
 
-    return NextResponse.json({ message: "User Created !!",data:user }, { status: 201 });
+    const verificationToken = await generateVerificationToken(email);
+    await sendVerificationEmail(
+      verificationToken.email,
+      verificationToken.token
+    );
+
+    return NextResponse.json(
+      { message: "Confirmation email send!" },
+      { status: 201 }
+    );
   } catch (error) {
     console.log("error", error);
     return NextResponse.json(
