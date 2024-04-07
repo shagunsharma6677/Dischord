@@ -33,7 +33,6 @@ export const RegisterForm = () => {
   const router = useRouter();
 
   const onSubmit = async (formData: z.infer<typeof RegisterSchema>) => {
-    console.log("formData", formData);
     setErrorMessage("");
     setSuccessMessage("");
 
@@ -45,8 +44,6 @@ export const RegisterForm = () => {
           "Content-Type": "application/json",
         },
       });
-
-      console.log("regRes", res)
 
       if (!res.ok) {
         const response = await res.json();
