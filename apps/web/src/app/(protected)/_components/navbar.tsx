@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { Button } from "@repo/ui";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { UserButton } from "../../../components/auth/user-button";
+import { Button } from '@repo/ui';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { UserButton } from '../../../components/auth/user-button';
 
 export const Navbar = () => {
   const pathname = usePathname();
@@ -13,22 +13,22 @@ export const Navbar = () => {
       <div className="flex gap-x-2">
         <Button
           asChild
-          variant={pathname === "/server" ? "default" : "outline"}
+          variant={pathname === '/server' ? 'default' : 'outline'}
         >
           <Link href="/server">Server</Link>
         </Button>
         <Button
           asChild
-          variant={pathname === "/client" ? "default" : "outline"}
+          variant={pathname === '/client' ? 'default' : 'outline'}
         >
           <Link href="/client">Client</Link>
         </Button>
-        <Button asChild variant={pathname === "/admin" ? "default" : "outline"}>
+        <Button asChild variant={pathname === '/admin' ? 'default' : 'outline'}>
           <Link href="/admin">Admin</Link>
         </Button>
         <Button
           asChild
-          variant={pathname === "/settings" ? "default" : "outline"}
+          variant={pathname === '/settings' ? 'default' : 'outline'}
         >
           <Link href="/settings">Settings</Link>
         </Button>

@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import * as z from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useTransition, useState } from "react";
-import { useSession } from "next-auth/react";
+import * as z from 'zod';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useTransition, useState } from 'react';
+import { useSession } from 'next-auth/react';
 import {
   Button,
   Card,
@@ -24,13 +24,13 @@ import {
   SelectTrigger,
   SelectValue,
   Switch,
-} from "@repo/ui";
-import { FormError } from "../../../components/form-error";
-import { FormSuccess } from "../../../components/form-success";
-import { useCurrentUser } from "../../../hooks/use-current-user";
-import { SettingsSchema } from "../../../schemas";
-import { settings } from "../../../actions/settings";
-import { UserRole } from "../../../prisma/src/generated/client";
+} from '@repo/ui';
+import { FormError } from '../../../components/form-error';
+import { FormSuccess } from '../../../components/form-success';
+import { useCurrentUser } from '../../../hooks/use-current-user';
+import { SettingsSchema } from '../../../schemas';
+import { settings } from '../../../actions/settings';
+import { UserRole } from '../../../prisma/src/generated/client';
 
 const SettingsPage = () => {
   const user = useCurrentUser();
@@ -65,7 +65,7 @@ const SettingsPage = () => {
             setSuccess(data.success);
           }
         })
-        .catch(() => setError("Something went wrong!"));
+        .catch(() => setError('Something went wrong!'));
     });
   };
 
