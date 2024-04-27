@@ -3,9 +3,10 @@ import {
   apiAuthPrefix,
   publicRoutes,
   authRoutes,
-} from "./routes";
-import authConfig from "./auth.config";
-import NextAuth from "next-auth";
+  UNAUTHORIZED_REDIRECT,
+} from './routes';
+import authConfig from './auth.config';
+import NextAuth from 'next-auth';
 
 const { auth }: any = NextAuth(authConfig);
 
@@ -34,12 +35,12 @@ export default auth((req: any) => {
   }
 
   if (!isLoggedIn && !isPublicRoute) {
-    return Response.redirect(new URL("/auth/login", nextUrl));
+    return Response.redirect(new URL(UNAUTHORIZED_REDIRECT, nextUrl));
   }
 
   return null;
 });
 // Optionally, don't invoke Middleware on some paths
 export const config = {
-  matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
+  matcher: ['/((?!.+\\.[\\w]+$|_next).*)', '/(api|trpc)(.*)'],
 };
