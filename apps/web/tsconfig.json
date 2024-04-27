@@ -6,9 +6,11 @@
         "name": "next"
       }
     ],
+    "paths": {
+      "@/*": ["./*"]
+    },
     "declaration": true, // Ensure declaration is set to true
-    "declarationMap": true, // Set declarationMap
-   
+    "declarationMap": true // Set declarationMap
   },
   "include": [
     "next-env.d.ts",

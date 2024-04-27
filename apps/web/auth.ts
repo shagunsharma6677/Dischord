@@ -1,11 +1,11 @@
-import authConfig from "./auth.config";
-import NextAuth from "next-auth";
-import { PrismaAdapter } from "@auth/prisma-adapter";
-import { db } from "./lib/db";
-import { UserRole } from "./prisma/src/generated/client";
-import { getUserById } from "./data/user";
-import { getTwoFactorConfirmationByUserId } from "./data/two-factor-confirmation";
-import { getAccountByUserId } from "./data/account";
+import authConfig from './auth.config';
+import NextAuth from 'next-auth';
+import { PrismaAdapter } from '@auth/prisma-adapter';
+import { db } from '@/src/lib/db';
+import { UserRole } from '@/src/prisma/src/generated/client';
+import { getUserById } from '@/src/data/user';
+import { getTwoFactorConfirmationByUserId } from '@/src/data/two-factor-confirmation';
+import { getAccountByUserId } from '@/src/data/account';
 
 export const {
   handlers: { GET, POST },
@@ -15,8 +15,8 @@ export const {
   update,
 }: any = NextAuth({
   pages: {
-    signIn: "/auth/login",
-    error: "/auth/error",
+    signIn: '/auth/login',
+    error: '/auth/error',
   },
   events: {
     async linkAccount({ user }) {
@@ -29,7 +29,8 @@ export const {
   callbacks: {
     async signIn({ user, account }) {
       // Allow OAuth without email verification
-      if (account?.provider !== "credentials") return true;
+
+      if (account?.provider !== 'credentials') return true;
 
       const existingUser = await getUserById(user.id);
 
@@ -95,8 +96,9 @@ export const {
     },
   },
   adapter: PrismaAdapter(db),
-  session: { strategy: "jwt" },
+  session: { strategy: 'jwt' },
   secret: process.env.AUTH_SECRET,
   // debug: process.env.NODE_ENV === "development",
+  // debug:true,
   ...authConfig,
 });
