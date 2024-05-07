@@ -417,8 +417,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact;
 
   /**
-   * Prisma Client JS version: 5.12.1
-   * Query Engine version: 473ed3124229e22d881cb7addf559799debae1ab
+   * Prisma Client JS version: 5.13.0
+   * Query Engine version: b9a39a7ee606c28e3455d0fd60e78c3ba82b1a2b
    */
   export type PrismaVersion = {
     client: string;
@@ -560,14 +560,16 @@ export namespace Prisma {
     include: any;
   };
 
+  type SelectAndOmit = {
+    select: any;
+    omit: any;
+  };
+
   /**
    * Get the type of the value, that the Promise holds.
    */
-  export type PromiseType<T extends PromiseLike<any>> = T extends PromiseLike<
-    infer U
-  >
-    ? U
-    : T;
+  export type PromiseType<T extends PromiseLike<any>> =
+    T extends PromiseLike<infer U> ? U : T;
 
   /**
    * Get the return type of a function which returns a Promise.
@@ -612,7 +614,9 @@ export namespace Prisma {
     [key in keyof T]: key extends keyof U ? T[key] : never;
   } & (T extends SelectAndInclude
     ? 'Please either choose `select` or `include`.'
-    : {});
+    : T extends SelectAndOmit
+      ? 'Please either choose `select` or `omit`.'
+      : {});
 
   /**
    * Subset + Intersection
@@ -637,17 +641,18 @@ export namespace Prisma {
   /**
    * Is T a Record?
    */
-  type IsObject<T extends any> = T extends Array<any>
-    ? False
-    : T extends Date
+  type IsObject<T extends any> =
+    T extends Array<any>
       ? False
-      : T extends Uint8Array
+      : T extends Date
         ? False
-        : T extends BigInt
+        : T extends Uint8Array
           ? False
-          : T extends object
-            ? True
-            : False;
+          : T extends BigInt
+            ? False
+            : T extends object
+              ? True
+              : False;
 
   /**
    * If it's T[], return T
@@ -1965,11 +1970,14 @@ export namespace Prisma {
         ? T['level']
         : never
       : never;
-  export type GetEvents<T extends any> = T extends Array<
-    LogLevel | LogDefinition
-  >
-    ? GetLogType<T[0]> | GetLogType<T[1]> | GetLogType<T[2]> | GetLogType<T[3]>
-    : never;
+  export type GetEvents<T extends any> =
+    T extends Array<LogLevel | LogDefinition>
+      ?
+          | GetLogType<T[0]>
+          | GetLogType<T[1]>
+          | GetLogType<T[2]>
+          | GetLogType<T[3]>
+      : never;
 
   export type QueryEvent = {
     timestamp: Date;
@@ -2062,7 +2070,6 @@ export namespace Prisma {
   };
 
   // Custom InputTypes
-
   /**
    * UserCountOutputType without action
    */
@@ -2103,7 +2110,6 @@ export namespace Prisma {
   };
 
   // Custom InputTypes
-
   /**
    * ProfileCountOutputType without action
    */
@@ -2160,7 +2166,6 @@ export namespace Prisma {
   };
 
   // Custom InputTypes
-
   /**
    * ServerCountOutputType without action
    */
@@ -2216,7 +2221,6 @@ export namespace Prisma {
   };
 
   // Custom InputTypes
-
   /**
    * MemberCountOutputType without action
    */
@@ -2280,7 +2284,6 @@ export namespace Prisma {
   };
 
   // Custom InputTypes
-
   /**
    * ChannelCountOutputType without action
    */
@@ -2319,7 +2322,6 @@ export namespace Prisma {
   };
 
   // Custom InputTypes
-
   /**
    * ConversationCountOutputType without action
    */
@@ -3115,7 +3117,6 @@ export namespace Prisma {
   }
 
   // Custom InputTypes
-
   /**
    * User findUnique
    */
@@ -3127,7 +3128,7 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null;
     /**
@@ -3147,7 +3148,7 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null;
     /**
@@ -3167,7 +3168,7 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null;
     /**
@@ -3217,7 +3218,7 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null;
     /**
@@ -3267,7 +3268,7 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null;
     /**
@@ -3312,7 +3313,7 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null;
     /**
@@ -3344,7 +3345,7 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null;
     /**
@@ -3384,7 +3385,7 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null;
     /**
@@ -3412,7 +3413,7 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null;
     /**
@@ -3476,7 +3477,7 @@ export namespace Prisma {
      */
     select?: AccountSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: AccountInclude<ExtArgs> | null;
     where?: AccountWhereInput;
@@ -3500,7 +3501,7 @@ export namespace Prisma {
      */
     select?: TwoFactorConfirmationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: TwoFactorConfirmationInclude<ExtArgs> | null;
     where?: TwoFactorConfirmationWhereInput;
@@ -3517,7 +3518,7 @@ export namespace Prisma {
      */
     select?: UserSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: UserInclude<ExtArgs> | null;
   };
@@ -4274,7 +4275,6 @@ export namespace Prisma {
   }
 
   // Custom InputTypes
-
   /**
    * Profile findUnique
    */
@@ -4286,7 +4286,7 @@ export namespace Prisma {
      */
     select?: ProfileSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ProfileInclude<ExtArgs> | null;
     /**
@@ -4306,7 +4306,7 @@ export namespace Prisma {
      */
     select?: ProfileSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ProfileInclude<ExtArgs> | null;
     /**
@@ -4326,7 +4326,7 @@ export namespace Prisma {
      */
     select?: ProfileSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ProfileInclude<ExtArgs> | null;
     /**
@@ -4378,7 +4378,7 @@ export namespace Prisma {
      */
     select?: ProfileSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ProfileInclude<ExtArgs> | null;
     /**
@@ -4430,7 +4430,7 @@ export namespace Prisma {
      */
     select?: ProfileSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ProfileInclude<ExtArgs> | null;
     /**
@@ -4477,7 +4477,7 @@ export namespace Prisma {
      */
     select?: ProfileSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ProfileInclude<ExtArgs> | null;
     /**
@@ -4509,7 +4509,7 @@ export namespace Prisma {
      */
     select?: ProfileSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ProfileInclude<ExtArgs> | null;
     /**
@@ -4549,7 +4549,7 @@ export namespace Prisma {
      */
     select?: ProfileSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ProfileInclude<ExtArgs> | null;
     /**
@@ -4577,7 +4577,7 @@ export namespace Prisma {
      */
     select?: ProfileSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ProfileInclude<ExtArgs> | null;
     /**
@@ -4641,7 +4641,7 @@ export namespace Prisma {
      */
     select?: ServerSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ServerInclude<ExtArgs> | null;
     where?: ServerWhereInput;
@@ -4663,7 +4663,7 @@ export namespace Prisma {
      */
     select?: MemberSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MemberInclude<ExtArgs> | null;
     where?: MemberWhereInput;
@@ -4685,7 +4685,7 @@ export namespace Prisma {
      */
     select?: ChannelSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ChannelInclude<ExtArgs> | null;
     where?: ChannelWhereInput;
@@ -4709,7 +4709,7 @@ export namespace Prisma {
      */
     select?: ProfileSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ProfileInclude<ExtArgs> | null;
   };
@@ -5463,7 +5463,6 @@ export namespace Prisma {
   }
 
   // Custom InputTypes
-
   /**
    * Server findUnique
    */
@@ -5475,7 +5474,7 @@ export namespace Prisma {
      */
     select?: ServerSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ServerInclude<ExtArgs> | null;
     /**
@@ -5495,7 +5494,7 @@ export namespace Prisma {
      */
     select?: ServerSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ServerInclude<ExtArgs> | null;
     /**
@@ -5515,7 +5514,7 @@ export namespace Prisma {
      */
     select?: ServerSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ServerInclude<ExtArgs> | null;
     /**
@@ -5565,7 +5564,7 @@ export namespace Prisma {
      */
     select?: ServerSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ServerInclude<ExtArgs> | null;
     /**
@@ -5615,7 +5614,7 @@ export namespace Prisma {
      */
     select?: ServerSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ServerInclude<ExtArgs> | null;
     /**
@@ -5660,7 +5659,7 @@ export namespace Prisma {
      */
     select?: ServerSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ServerInclude<ExtArgs> | null;
     /**
@@ -5692,7 +5691,7 @@ export namespace Prisma {
      */
     select?: ServerSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ServerInclude<ExtArgs> | null;
     /**
@@ -5732,7 +5731,7 @@ export namespace Prisma {
      */
     select?: ServerSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ServerInclude<ExtArgs> | null;
     /**
@@ -5760,7 +5759,7 @@ export namespace Prisma {
      */
     select?: ServerSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ServerInclude<ExtArgs> | null;
     /**
@@ -5824,7 +5823,7 @@ export namespace Prisma {
      */
     select?: MemberSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MemberInclude<ExtArgs> | null;
     where?: MemberWhereInput;
@@ -5846,7 +5845,7 @@ export namespace Prisma {
      */
     select?: ChannelSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ChannelInclude<ExtArgs> | null;
     where?: ChannelWhereInput;
@@ -5870,7 +5869,7 @@ export namespace Prisma {
      */
     select?: ServerSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ServerInclude<ExtArgs> | null;
   };
@@ -6660,7 +6659,6 @@ export namespace Prisma {
   }
 
   // Custom InputTypes
-
   /**
    * Member findUnique
    */
@@ -6672,7 +6670,7 @@ export namespace Prisma {
      */
     select?: MemberSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MemberInclude<ExtArgs> | null;
     /**
@@ -6692,7 +6690,7 @@ export namespace Prisma {
      */
     select?: MemberSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MemberInclude<ExtArgs> | null;
     /**
@@ -6712,7 +6710,7 @@ export namespace Prisma {
      */
     select?: MemberSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MemberInclude<ExtArgs> | null;
     /**
@@ -6762,7 +6760,7 @@ export namespace Prisma {
      */
     select?: MemberSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MemberInclude<ExtArgs> | null;
     /**
@@ -6812,7 +6810,7 @@ export namespace Prisma {
      */
     select?: MemberSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MemberInclude<ExtArgs> | null;
     /**
@@ -6857,7 +6855,7 @@ export namespace Prisma {
      */
     select?: MemberSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MemberInclude<ExtArgs> | null;
     /**
@@ -6889,7 +6887,7 @@ export namespace Prisma {
      */
     select?: MemberSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MemberInclude<ExtArgs> | null;
     /**
@@ -6929,7 +6927,7 @@ export namespace Prisma {
      */
     select?: MemberSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MemberInclude<ExtArgs> | null;
     /**
@@ -6957,7 +6955,7 @@ export namespace Prisma {
      */
     select?: MemberSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MemberInclude<ExtArgs> | null;
     /**
@@ -7021,7 +7019,7 @@ export namespace Prisma {
      */
     select?: MessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MessageInclude<ExtArgs> | null;
     where?: MessageWhereInput;
@@ -7045,7 +7043,7 @@ export namespace Prisma {
      */
     select?: DirectMessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: DirectMessageInclude<ExtArgs> | null;
     where?: DirectMessageWhereInput;
@@ -7069,7 +7067,7 @@ export namespace Prisma {
      */
     select?: ConversationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ConversationInclude<ExtArgs> | null;
     where?: ConversationWhereInput;
@@ -7093,7 +7091,7 @@ export namespace Prisma {
      */
     select?: ConversationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ConversationInclude<ExtArgs> | null;
     where?: ConversationWhereInput;
@@ -7117,7 +7115,7 @@ export namespace Prisma {
      */
     select?: MemberSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MemberInclude<ExtArgs> | null;
   };
@@ -7888,7 +7886,6 @@ export namespace Prisma {
   }
 
   // Custom InputTypes
-
   /**
    * Channel findUnique
    */
@@ -7900,7 +7897,7 @@ export namespace Prisma {
      */
     select?: ChannelSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ChannelInclude<ExtArgs> | null;
     /**
@@ -7920,7 +7917,7 @@ export namespace Prisma {
      */
     select?: ChannelSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ChannelInclude<ExtArgs> | null;
     /**
@@ -7940,7 +7937,7 @@ export namespace Prisma {
      */
     select?: ChannelSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ChannelInclude<ExtArgs> | null;
     /**
@@ -7992,7 +7989,7 @@ export namespace Prisma {
      */
     select?: ChannelSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ChannelInclude<ExtArgs> | null;
     /**
@@ -8044,7 +8041,7 @@ export namespace Prisma {
      */
     select?: ChannelSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ChannelInclude<ExtArgs> | null;
     /**
@@ -8091,7 +8088,7 @@ export namespace Prisma {
      */
     select?: ChannelSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ChannelInclude<ExtArgs> | null;
     /**
@@ -8123,7 +8120,7 @@ export namespace Prisma {
      */
     select?: ChannelSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ChannelInclude<ExtArgs> | null;
     /**
@@ -8163,7 +8160,7 @@ export namespace Prisma {
      */
     select?: ChannelSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ChannelInclude<ExtArgs> | null;
     /**
@@ -8191,7 +8188,7 @@ export namespace Prisma {
      */
     select?: ChannelSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ChannelInclude<ExtArgs> | null;
     /**
@@ -8255,7 +8252,7 @@ export namespace Prisma {
      */
     select?: MessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MessageInclude<ExtArgs> | null;
     where?: MessageWhereInput;
@@ -8279,7 +8276,7 @@ export namespace Prisma {
      */
     select?: ChannelSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ChannelInclude<ExtArgs> | null;
   };
@@ -9050,7 +9047,6 @@ export namespace Prisma {
   }
 
   // Custom InputTypes
-
   /**
    * Message findUnique
    */
@@ -9062,7 +9058,7 @@ export namespace Prisma {
      */
     select?: MessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MessageInclude<ExtArgs> | null;
     /**
@@ -9082,7 +9078,7 @@ export namespace Prisma {
      */
     select?: MessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MessageInclude<ExtArgs> | null;
     /**
@@ -9102,7 +9098,7 @@ export namespace Prisma {
      */
     select?: MessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MessageInclude<ExtArgs> | null;
     /**
@@ -9154,7 +9150,7 @@ export namespace Prisma {
      */
     select?: MessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MessageInclude<ExtArgs> | null;
     /**
@@ -9206,7 +9202,7 @@ export namespace Prisma {
      */
     select?: MessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MessageInclude<ExtArgs> | null;
     /**
@@ -9253,7 +9249,7 @@ export namespace Prisma {
      */
     select?: MessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MessageInclude<ExtArgs> | null;
     /**
@@ -9285,7 +9281,7 @@ export namespace Prisma {
      */
     select?: MessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MessageInclude<ExtArgs> | null;
     /**
@@ -9325,7 +9321,7 @@ export namespace Prisma {
      */
     select?: MessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MessageInclude<ExtArgs> | null;
     /**
@@ -9353,7 +9349,7 @@ export namespace Prisma {
      */
     select?: MessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MessageInclude<ExtArgs> | null;
     /**
@@ -9417,7 +9413,7 @@ export namespace Prisma {
      */
     select?: MessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: MessageInclude<ExtArgs> | null;
   };
@@ -10157,7 +10153,6 @@ export namespace Prisma {
   }
 
   // Custom InputTypes
-
   /**
    * Conversation findUnique
    */
@@ -10169,7 +10164,7 @@ export namespace Prisma {
      */
     select?: ConversationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ConversationInclude<ExtArgs> | null;
     /**
@@ -10189,7 +10184,7 @@ export namespace Prisma {
      */
     select?: ConversationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ConversationInclude<ExtArgs> | null;
     /**
@@ -10209,7 +10204,7 @@ export namespace Prisma {
      */
     select?: ConversationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ConversationInclude<ExtArgs> | null;
     /**
@@ -10261,7 +10256,7 @@ export namespace Prisma {
      */
     select?: ConversationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ConversationInclude<ExtArgs> | null;
     /**
@@ -10313,7 +10308,7 @@ export namespace Prisma {
      */
     select?: ConversationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ConversationInclude<ExtArgs> | null;
     /**
@@ -10360,7 +10355,7 @@ export namespace Prisma {
      */
     select?: ConversationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ConversationInclude<ExtArgs> | null;
     /**
@@ -10392,7 +10387,7 @@ export namespace Prisma {
      */
     select?: ConversationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ConversationInclude<ExtArgs> | null;
     /**
@@ -10435,7 +10430,7 @@ export namespace Prisma {
      */
     select?: ConversationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ConversationInclude<ExtArgs> | null;
     /**
@@ -10463,7 +10458,7 @@ export namespace Prisma {
      */
     select?: ConversationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ConversationInclude<ExtArgs> | null;
     /**
@@ -10527,7 +10522,7 @@ export namespace Prisma {
      */
     select?: DirectMessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: DirectMessageInclude<ExtArgs> | null;
     where?: DirectMessageWhereInput;
@@ -10551,7 +10546,7 @@ export namespace Prisma {
      */
     select?: ConversationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: ConversationInclude<ExtArgs> | null;
   };
@@ -11334,7 +11329,6 @@ export namespace Prisma {
   }
 
   // Custom InputTypes
-
   /**
    * DirectMessage findUnique
    */
@@ -11346,7 +11340,7 @@ export namespace Prisma {
      */
     select?: DirectMessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: DirectMessageInclude<ExtArgs> | null;
     /**
@@ -11366,7 +11360,7 @@ export namespace Prisma {
      */
     select?: DirectMessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: DirectMessageInclude<ExtArgs> | null;
     /**
@@ -11386,7 +11380,7 @@ export namespace Prisma {
      */
     select?: DirectMessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: DirectMessageInclude<ExtArgs> | null;
     /**
@@ -11438,7 +11432,7 @@ export namespace Prisma {
      */
     select?: DirectMessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: DirectMessageInclude<ExtArgs> | null;
     /**
@@ -11490,7 +11484,7 @@ export namespace Prisma {
      */
     select?: DirectMessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: DirectMessageInclude<ExtArgs> | null;
     /**
@@ -11537,7 +11531,7 @@ export namespace Prisma {
      */
     select?: DirectMessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: DirectMessageInclude<ExtArgs> | null;
     /**
@@ -11569,7 +11563,7 @@ export namespace Prisma {
      */
     select?: DirectMessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: DirectMessageInclude<ExtArgs> | null;
     /**
@@ -11612,7 +11606,7 @@ export namespace Prisma {
      */
     select?: DirectMessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: DirectMessageInclude<ExtArgs> | null;
     /**
@@ -11640,7 +11634,7 @@ export namespace Prisma {
      */
     select?: DirectMessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: DirectMessageInclude<ExtArgs> | null;
     /**
@@ -11704,7 +11698,7 @@ export namespace Prisma {
      */
     select?: DirectMessageSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: DirectMessageInclude<ExtArgs> | null;
   };
@@ -12533,7 +12527,6 @@ export namespace Prisma {
   }
 
   // Custom InputTypes
-
   /**
    * Account findUnique
    */
@@ -12545,7 +12538,7 @@ export namespace Prisma {
      */
     select?: AccountSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: AccountInclude<ExtArgs> | null;
     /**
@@ -12565,7 +12558,7 @@ export namespace Prisma {
      */
     select?: AccountSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: AccountInclude<ExtArgs> | null;
     /**
@@ -12585,7 +12578,7 @@ export namespace Prisma {
      */
     select?: AccountSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: AccountInclude<ExtArgs> | null;
     /**
@@ -12637,7 +12630,7 @@ export namespace Prisma {
      */
     select?: AccountSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: AccountInclude<ExtArgs> | null;
     /**
@@ -12689,7 +12682,7 @@ export namespace Prisma {
      */
     select?: AccountSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: AccountInclude<ExtArgs> | null;
     /**
@@ -12736,7 +12729,7 @@ export namespace Prisma {
      */
     select?: AccountSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: AccountInclude<ExtArgs> | null;
     /**
@@ -12768,7 +12761,7 @@ export namespace Prisma {
      */
     select?: AccountSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: AccountInclude<ExtArgs> | null;
     /**
@@ -12808,7 +12801,7 @@ export namespace Prisma {
      */
     select?: AccountSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: AccountInclude<ExtArgs> | null;
     /**
@@ -12836,7 +12829,7 @@ export namespace Prisma {
      */
     select?: AccountSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: AccountInclude<ExtArgs> | null;
     /**
@@ -12900,7 +12893,7 @@ export namespace Prisma {
      */
     select?: AccountSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: AccountInclude<ExtArgs> | null;
   };
@@ -13615,7 +13608,6 @@ export namespace Prisma {
   }
 
   // Custom InputTypes
-
   /**
    * VerificationToken findUnique
    */
@@ -14697,7 +14689,6 @@ export namespace Prisma {
   }
 
   // Custom InputTypes
-
   /**
    * PasswordResetToken findUnique
    */
@@ -15748,7 +15739,6 @@ export namespace Prisma {
   }
 
   // Custom InputTypes
-
   /**
    * TwoFactorToken findUnique
    */
@@ -16819,7 +16809,6 @@ export namespace Prisma {
   }
 
   // Custom InputTypes
-
   /**
    * TwoFactorConfirmation findUnique
    */
@@ -16831,7 +16820,7 @@ export namespace Prisma {
      */
     select?: TwoFactorConfirmationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: TwoFactorConfirmationInclude<ExtArgs> | null;
     /**
@@ -16851,7 +16840,7 @@ export namespace Prisma {
      */
     select?: TwoFactorConfirmationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: TwoFactorConfirmationInclude<ExtArgs> | null;
     /**
@@ -16871,7 +16860,7 @@ export namespace Prisma {
      */
     select?: TwoFactorConfirmationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: TwoFactorConfirmationInclude<ExtArgs> | null;
     /**
@@ -16925,7 +16914,7 @@ export namespace Prisma {
      */
     select?: TwoFactorConfirmationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: TwoFactorConfirmationInclude<ExtArgs> | null;
     /**
@@ -16979,7 +16968,7 @@ export namespace Prisma {
      */
     select?: TwoFactorConfirmationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: TwoFactorConfirmationInclude<ExtArgs> | null;
     /**
@@ -17028,7 +17017,7 @@ export namespace Prisma {
      */
     select?: TwoFactorConfirmationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: TwoFactorConfirmationInclude<ExtArgs> | null;
     /**
@@ -17065,7 +17054,7 @@ export namespace Prisma {
      */
     select?: TwoFactorConfirmationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: TwoFactorConfirmationInclude<ExtArgs> | null;
     /**
@@ -17111,7 +17100,7 @@ export namespace Prisma {
      */
     select?: TwoFactorConfirmationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: TwoFactorConfirmationInclude<ExtArgs> | null;
     /**
@@ -17145,7 +17134,7 @@ export namespace Prisma {
      */
     select?: TwoFactorConfirmationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: TwoFactorConfirmationInclude<ExtArgs> | null;
     /**
@@ -17209,7 +17198,7 @@ export namespace Prisma {
      */
     select?: TwoFactorConfirmationSelect<ExtArgs> | null;
     /**
-     * Choose, which related nodes to fetch as well.
+     * Choose, which related nodes to fetch as well
      */
     include?: TwoFactorConfirmationInclude<ExtArgs> | null;
   };
