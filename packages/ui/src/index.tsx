@@ -16,3 +16,4 @@ export * from './components/scroll-area';
 export * from './components/label';
 export * from './components/command';
 export * from './components/sheet';
+export * from './components/popover';
