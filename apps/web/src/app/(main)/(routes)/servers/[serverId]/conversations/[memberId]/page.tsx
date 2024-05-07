@@ -1,5 +1,9 @@
 import { UNAUTHORIZED_REDIRECT } from '@/routes';
-// import { ChatHeader } from "@/src/components/chat/chat-header";
+import { ChatHeader } from '@/src/components/chat/chat-header';
+import { ChatInput } from '@/src/components/chat/chat-input';
+import { ChatMessages } from '@/src/components/chat/chat-messages';
+import { MediaRoom } from '@/src/components/media-room';
+
 import { getOrCreateConversation } from '@/src/lib/conversation';
 import { currentProfile } from '@/src/lib/current-profile';
 import { db } from '@/src/lib/db';
@@ -45,24 +49,21 @@ const MemberIdPage = async ({ params, searchParams }: MemberIdPageProps) => {
     return redirect(`/servers/${params.serverId}`);
   }
 
-  // const { memberOne, memberTwo } = conversation;
-
-  // const otherMember = memberOne.profileId === profile.id ? memberTwo : memberOne;
+  const { memberOne, memberTwo } = conversation;
+  //
+  const otherMember =
+    memberOne.profileId === profile.id ? memberTwo : memberOne;
 
   return (
     <div className="bg-white dark:bg-[#313338] flex flex-col h-full">
-      {/* <ChatHeader
+      <ChatHeader
         imageUrl={otherMember.profile.imageUrl}
         name={otherMember.profile.name}
         serverId={params.serverId}
         type="conversation"
       />
       {searchParams.video && (
-        <MediaRoom
-          chatId={conversation.id}
-          video={true}
-          audio={true}
-        />
+        <MediaRoom chatId={conversation.id} video={true} audio={true} />
       )}
       {!searchParams.video && (
         <>
@@ -88,7 +89,7 @@ const MemberIdPage = async ({ params, searchParams }: MemberIdPageProps) => {
             }}
           />
         </>
-      )} */}
+      )}
     </div>
   );
 };

@@ -7,6 +7,8 @@ import { ThemeProvider } from '@/src/components/providers/theme-provider';
 
 import { ModalProvider } from '../components/providers/ModalProvider';
 import { cn } from '../../../../packages/ui/src/lib/utils';
+import { SocketProvider } from '../components/providers/socket-provider';
+import { QueryProvider } from '../components/providers/query-provider';
 
 const font = Open_Sans({ subsets: ['latin'] });
 
@@ -31,8 +33,10 @@ export default async function RootLayout({
             enableSystem={false}
             storageKey="dischord-theme"
           >
-            <ModalProvider />
-            {children}
+            <SocketProvider>
+              <ModalProvider />
+              <QueryProvider>{children}</QueryProvider>
+            </SocketProvider>
           </ThemeProvider>
         </body>
       </html>

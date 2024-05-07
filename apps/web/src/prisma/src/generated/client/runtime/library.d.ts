@@ -141,11 +141,8 @@ declare interface CallSite {
 
 export declare type Cast<A, W> = A extends W ? A : W;
 
-declare type Client = ReturnType<
-  typeof getPrismaClient
-> extends new () => infer T
-  ? T
-  : never;
+declare type Client =
+  ReturnType<typeof getPrismaClient> extends new () => infer T ? T : never;
 
 export declare type ClientArg = {
   [MethodName in string]: unknown;
@@ -1286,6 +1283,7 @@ declare interface Engine<InteractiveTransactionPayload = unknown> {
   ): Promise<void>;
   metrics(options: MetricsOptionsJson): Promise<Metrics>;
   metrics(options: MetricsOptionsPrometheus): Promise<string>;
+  applyPendingMigrations(): Promise<void>;
 }
 
 declare interface EngineConfig {
@@ -1396,11 +1394,8 @@ declare interface EnvValue {
   value: null | string;
 }
 
-export declare type Equals<A, B> = (<T>() => T extends A ? 1 : 2) extends <
-  T,
->() => T extends B ? 1 : 2
-  ? 1
-  : 0;
+export declare type Equals<A, B> =
+  (<T>() => T extends A ? 1 : 2) extends <T>() => T extends B ? 1 : 2 ? 1 : 0;
 
 declare type Error_2 =
   | {
@@ -1599,6 +1594,7 @@ declare namespace Extensions_2 {
     DefaultArgs,
     GetPayloadResult,
     GetSelect,
+    GetOmit,
     DynamicQueryExtensionArgs,
     DynamicQueryExtensionCb,
     DynamicQueryExtensionCbArgs,
@@ -1706,56 +1702,11 @@ export declare type GetCountResult<A> = A extends {
 
 declare function getExtensionContext<T>(that: T): Context_2<T>;
 
-export declare type GetFindResult<P extends OperationPayload, A> = Equals<
-  A,
-  any
-> extends 1
-  ? DefaultSelection<P>
-  : A extends
-        | ({
-            select: infer S extends object;
-          } & Record<string, unknown>)
-        | ({
-            include: infer I extends object;
-          } & Record<string, unknown>)
-    ? {
-        [K in keyof S | keyof I as (S & I)[K] extends false | undefined | null
-          ? never
-          : K]: (S & I)[K] extends object
-          ? P extends SelectablePayloadFields<K, (infer O)[]>
-            ? O extends OperationPayload
-              ? GetFindResult<O, (S & I)[K]>[]
-              : never
-            : P extends SelectablePayloadFields<K, infer O | null>
-              ? O extends OperationPayload
-                ? GetFindResult<O, (S & I)[K]> | (SelectField<P, K> & null)
-                : never
-              : K extends '_count'
-                ? Count<GetFindResult<P, (S & I)[K]>>
-                : never
-          : P extends SelectablePayloadFields<K, (infer O)[]>
-            ? O extends OperationPayload
-              ? DefaultSelection<O>[]
-              : never
-            : P extends SelectablePayloadFields<K, infer O | null>
-              ? O extends OperationPayload
-                ? DefaultSelection<O> | (SelectField<P, K> & null)
-                : never
-              : P extends {
-                    scalars: {
-                      [k in K]: infer O;
-                    };
-                  }
-                ? O
-                : K extends '_count'
-                  ? Count<P['objects']>
-                  : never;
-      } & (A extends {
-        include: any;
-      } & Record<string, unknown>
-        ? DefaultSelection<P>
-        : unknown)
-    : DefaultSelection<P>;
+export declare type GetFindResult<P extends OperationPayload, A> = A extends {
+  omit: infer Omission;
+}
+  ? Compute<Omit_2<GetSelectIncludeResult<P, A>, TrueKeys<Omission>>>
+  : GetSelectIncludeResult<P, A>;
 
 export declare type GetGroupByResult<
   P extends OperationPayload,
@@ -1777,6 +1728,13 @@ export declare type GetGroupByResult<
         }
       >
     : {}[];
+
+export declare type GetOmit<
+  BaseKeys extends string,
+  R extends InternalArgs['result'][string],
+> = {
+  [K in (string extends keyof R ? never : keyof R) | BaseKeys]?: boolean;
+};
 
 export declare type GetPayloadResult<
   Base extends Record<any, any>,
@@ -1966,6 +1924,7 @@ export declare function getPrismaClient(config: GetPrismaClientConfig): {
      * @returns
      */
     _hasPreviewFlag(feature: string): boolean;
+    $applyPendingMigrations(): Promise<void>;
     $extends: typeof $extends;
     readonly [Symbol.toStringTag]: string;
   };
@@ -2093,6 +2052,55 @@ export declare type GetSelect<
 > = {
   [K in KR | keyof Base]?: K extends KR ? boolean : Base[K];
 };
+
+export declare type GetSelectIncludeResult<P extends OperationPayload, A> =
+  Equals<A, any> extends 1
+    ? DefaultSelection<P>
+    : A extends
+          | ({
+              select: infer S extends object;
+            } & Record<string, unknown>)
+          | ({
+              include: infer I extends object;
+            } & Record<string, unknown>)
+      ? {
+          [K in keyof S | keyof I as (S & I)[K] extends false | undefined | null
+            ? never
+            : K]: (S & I)[K] extends object
+            ? P extends SelectablePayloadFields<K, (infer O)[]>
+              ? O extends OperationPayload
+                ? GetFindResult<O, (S & I)[K]>[]
+                : never
+              : P extends SelectablePayloadFields<K, infer O | null>
+                ? O extends OperationPayload
+                  ? GetFindResult<O, (S & I)[K]> | (SelectField<P, K> & null)
+                  : never
+                : K extends '_count'
+                  ? Count<GetFindResult<P, (S & I)[K]>>
+                  : never
+            : P extends SelectablePayloadFields<K, (infer O)[]>
+              ? O extends OperationPayload
+                ? DefaultSelection<O>[]
+                : never
+              : P extends SelectablePayloadFields<K, infer O | null>
+                ? O extends OperationPayload
+                  ? DefaultSelection<O> | (SelectField<P, K> & null)
+                  : never
+                : P extends {
+                      scalars: {
+                        [k in K]: infer O;
+                      };
+                    }
+                  ? O
+                  : K extends '_count'
+                    ? Count<P['objects']>
+                    : never;
+        } & (A extends {
+          include: any;
+        } & Record<string, unknown>
+          ? DefaultSelection<P>
+          : unknown)
+      : DefaultSelection<P>;
 
 declare type HandleErrorParams = {
   args: JsArgs;
@@ -2229,6 +2237,7 @@ export declare function join(
 export declare type JsArgs = {
   select?: Selection_2;
   include?: Selection_2;
+  omit?: Omission;
   [argName: string]: JsInputValue;
 };
 
@@ -2666,6 +2675,8 @@ declare const officialPrismaAdapters: readonly [
   '@prisma/adapter-pg-worker',
 ];
 
+export declare type Omission = Record<string, boolean>;
+
 declare type Omit_2<T, K extends string | number | symbol> = {
   [P in keyof T as P extends K ? never : P]: T[P];
 };
@@ -3054,6 +3065,7 @@ declare type QueryEngineInstance = {
   commitTransaction(id: string, traceHeaders: string): Promise<string>;
   rollbackTransaction(id: string, traceHeaders: string): Promise<string>;
   metrics(options: string): Promise<string>;
+  applyPendingMigrations(): Promise<void>;
 };
 
 declare type QueryEngineLogLevel =
@@ -3303,7 +3315,9 @@ declare namespace Result_3 {
     Operation,
     FluentOperation,
     Count,
+    TrueKeys,
     GetFindResult,
+    GetSelectIncludeResult,
     SelectablePayloadFields,
     SelectField,
     DefaultSelection,
@@ -3788,6 +3802,10 @@ declare type TransactionOptions_2<InteractiveTransactionPayload> =
       kind: 'batch';
       options: BatchTransactionOptions;
     };
+
+export declare type TrueKeys<T> = {
+  [K in keyof T]: T[K] extends true ? K : never;
+}[keyof T];
 
 export declare type TypeMapCbDef = Fn<
   {

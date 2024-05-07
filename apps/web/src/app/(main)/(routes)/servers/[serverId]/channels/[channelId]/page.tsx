@@ -1,6 +1,11 @@
 import { UNAUTHORIZED_REDIRECT } from '@/routes';
+import { ChatHeader } from '@/src/components/chat/chat-header';
+import { ChatInput } from '@/src/components/chat/chat-input';
+import { ChatMessages } from '@/src/components/chat/chat-messages';
+import { MediaRoom } from '@/src/components/media-room';
 import { currentProfile } from '@/src/lib/current-profile';
 import { db } from '@/src/lib/db';
+import { ChannelType } from '@/src/prisma/src/generated/client';
 import { redirect } from 'next/navigation';
 
 interface ChannelIdPageProps {
@@ -31,12 +36,12 @@ const ChannelIdPage = async ({ params }: ChannelIdPageProps) => {
   });
 
   if (!channel || !member) {
-    redirect('/');
+    return redirect('/');
   }
 
   return (
     <div className="bg-white dark:bg-[#313338] flex flex-col h-full">
-      {/* <ChatHeader
+      <ChatHeader
         name={channel.name}
         serverId={channel.serverId}
         type="channel"
@@ -73,8 +78,7 @@ const ChannelIdPage = async ({ params }: ChannelIdPageProps) => {
       )}
       {channel.type === ChannelType.VIDEO && (
         <MediaRoom chatId={channel.id} video={true} audio={true} />
-      )} */}
-      This is Header
+      )}
     </div>
   );
 };

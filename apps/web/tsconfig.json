@@ -7,10 +7,14 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": [
+        "./*"
+      ]
     },
     "declaration": true, // Ensure declaration is set to true
     "declarationMap": true // Set declarationMap
+    ,
+    "strictNullChecks": true
   },
   "include": [
     "next-env.d.ts",
@@ -22,5 +26,7 @@
     "app/api/auth/[...nextauth]/route.js",
     "app/api/auth/[...nextauth]/options.js"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }
