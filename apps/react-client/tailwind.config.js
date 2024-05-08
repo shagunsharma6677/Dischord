@@ -6,7 +6,7 @@ const tailwindConfig = {
     // Include your project files here
     // For example: './src/**/*.html',
     // Add Next UI theme files path
-    './node_modules/@nextui-org/react/dist/**/*.{js,ts,jsx,tsx}',
+    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
     './src/**/*.{html,js,ts,jsx,tsx}',
   ],
   theme: {

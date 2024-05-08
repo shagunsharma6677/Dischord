@@ -8,7 +8,7 @@
     ],
     "paths": {
       "@/*": [
-        "./*"
+        "./src/*"
       ]
     },
     "declaration": true, // Ensure declaration is set to true
