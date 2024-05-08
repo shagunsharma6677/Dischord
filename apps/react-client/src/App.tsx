@@ -1,10 +1,13 @@
 import { Fragment } from 'react';
-// import './App.css';
+import NavigationSidebar from '@/components/Navigation/NavigationSidebar';
+import './App.css';
 
 function App() {
   return (
     <Fragment>
-      <div className="bg-black h-screen">lorem</div>
+      <div className="dark text-foreground bg-background h-screen">
+        <NavigationSidebar />
+      </div>
     </Fragment>
   );
 }

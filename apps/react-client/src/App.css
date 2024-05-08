@@ -7,3 +7,12 @@
   padding: 0;
   box-sizing: border-box;
 }
+.fcc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.fc {
+  display: flex;
+  justify-content: center;
+}
