@@ -1,67 +1,62 @@
-import { Image } from '@nextui-org/image';
-import { Avatar, Badge } from '@nextui-org/react';
-import { faker } from '@faker-js/faker';
+import { Avatar, Badge, Image } from '@nextui-org/react';
 
 const NavigationSidebar = () => {
   return (
-    <div className="app-navigation-sidebar bg-zinc-900 h-full fixed w-[72px] overflow-hidden ">
-      <div className="h-14 flex justify-center items-center border-b border-b-gray-800">
+    <div className="app-navigation-sidebar shadow shadow-gray-700/30  hidden sm:flex flex-col bg-neutral-800 h-full fixed inset-y-0 z-30 w-20 overflow-hidden ">
+      <div className="h-16 flex justify-center items-center shadow shadow-gray-700/30 ">
         <div className="w-8">
           <Image
             isBlurred
-            className="rounded-full"
+            className="rounded-full cursor-pointer"
             src="https://nextui-docs-v2.vercel.app/images/album-cover.png"
             alt="NextUI Album Cover"
           />
         </div>
       </div>
-      <div className="fcc py-3 flex flex-col gap-4">
+      <div className="fcc py-5 flex flex-col gap-5">
         <Badge color="purple" shape="circle" showOutline={false}>
-          <Avatar
-            isBordered
-            color="purple"
-            radius="full"
-            src={faker.image.avatar()}
-          />
-        </Badge>
-        <Badge color="primary" shape="circle" showOutline={false}>
           <Avatar
             isBordered
             color="primary"
             radius="full"
-            src={faker.image.avatar()}
+            src={
+              'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1105.jpg'
+            }
+            className="cursor-pointer"
           />
         </Badge>
-        <Badge color="secondary" shape="circle" showOutline={false}>
+        <Badge color="primary" shape="circle" showOutline={false}>
           <Avatar
-            isBordered
-            color="secondary"
             radius="full"
-            src={faker.image.avatar()}
+            src={
+              'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1079.jpg'
+            }
+            className="cursor-pointer"
           />
         </Badge>
-        <Badge color="success" shape="circle" showOutline={false}>
+        <Badge shape="circle" showOutline={false}>
           <Avatar
-            isBordered
-            color="success"
             radius="full"
-            src={faker.image.avatar()}
+            src={'https://avatars.githubusercontent.com/u/79519650'}
+            className="cursor-pointer"
           />
         </Badge>
-        <Badge color="warning" shape="circle" showOutline={false}>
+        <Badge shape="circle" showOutline={false}>
           <Avatar
-            isBordered
-            color="warning"
             radius="full"
-            src={faker.image.avatar()}
+            src={
+              'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/595.jpg'
+            }
+            className="cursor-pointer"
           />
         </Badge>
-        <Badge color="danger" shape="circle" showOutline={false}>
+        <Badge shape="circle" showOutline={false}>
           <Avatar
-            isBordered
-            color="danger"
             radius="full"
-            src={faker.image.avatar()}
+            src={
+              'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/690.jpg'
+            }
+            className="cursor-pointer"
           />
         </Badge>
       </div>
