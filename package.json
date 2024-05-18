@@ -7,9 +7,9 @@
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepare": "husky",
-    "clean:node_modules": "rm -rf node_modules apps/web/node_modules apps/docs/node_modules packages/eslint-config/node_modules packages/tailwind-config/node_modules packages/ui/node_modules",
-    "clean:cache": "rm -rf .turbo apps/web/.next apps/web/.turbo apps/docs/.next apps/docs/.turbo",
-    "clean:all": "rm -rf node_modules apps/web/node_modules apps/docs/node_modules packages/eslint-config/node_modules packages/tailwind-config/node_modules packages/ui/node_modules .turbo apps/web/.next apps/web/.turbo apps/docs/.next apps/docs/.turbo"
+    "clean:node_modules": "rm -rf node_modules apps/web/node_modules apps/react-client/node_modules packages/eslint-config/node_modules packages/tailwind-config/node_modules packages/ui/node_modules ",
+    "clean:cache": "rm -rf .turbo apps/web/.next apps/web/.turbo apps/react-client/.turbo apps/react-client/.vercel apps/react-client/dist ",
+    "clean:all": "rm -rf node_modules apps/web/node_modules apps/react-client/node_modules packages/eslint-config/node_modules packages/tailwind-config/node_modules packages/ui/node_modules .turbo apps/web/.next apps/web/.turbo apps/react-client/.turbo apps/react-client/.vercel apps/react-client/dist"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",

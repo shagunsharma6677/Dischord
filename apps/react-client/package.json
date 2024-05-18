@@ -10,16 +10,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@nextui-org/image": "^2.0.27",
     "@nextui-org/react": "^2.3.6",
     "@nextui-org/system": "^2.1.2",
     "@nextui-org/theme": "^2.2.3",
+    "emoji-picker-react": "^4.9.2",
     "framer-motion": "^11.1.9",
+    "lucide-react": "^0.378.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@faker-js/faker": "^8.4.1",
     "@repo/eslint-config": "workspace:*",
     "@repo/tailwing-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
