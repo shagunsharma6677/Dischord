@@ -250,7 +250,7 @@ const config = {
     },
     output: {
       value:
-        '/home/shagun-xcitech/Open Source/Discord Apps/Dischord/apps/web/src/prisma/src/generated/client',
+        '/home/shagun-xcitech/Open Source/Discord Apps/Dischord/apps/next/src/prisma/src/generated/client',
       fromEnvVar: null,
     },
     config: {
