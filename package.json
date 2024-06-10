@@ -27,7 +27,7 @@
     "apps/**/*.{js,jsx,ts,tsx,md,html,css}": "prettier --write",
     "packages/**/*.{js,jsx,ts,tsx,md,html,css}": "prettier --write"
   },
-  "packageManager": "pnpm@9.1.2",
+  "packageManager": "pnpm@9.2.0",
   "engines": {
     "node": ">=18",
     "npm": "Please use pnpm",
