@@ -1,9 +1,9 @@
 import { currentProfile } from '@/src/lib/current-profile';
 import { db } from '@/src/lib/db';
 import { Message } from '@/src/prisma/src/generated/client';
-import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server.js';
 
-const MESSAGES_BATCH = 10;
+const MESSAGES_BATCH: any = 10;
 
 export async function GET(req: Request) {
   try {

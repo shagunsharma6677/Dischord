@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server.js';
 import { db } from '@/src/lib/db';
 import { currentProfile } from '@/src/lib/current-profile';
 

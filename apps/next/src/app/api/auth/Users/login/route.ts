@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server.js';
 import { LoginSchema } from '../../../../../schemas/index';
 import { signIn } from '@/auth';
 import { findByEmail } from '../../../../../data/user';

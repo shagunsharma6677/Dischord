@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server.js';
 import { currentProfile } from '@/src/lib/current-profile';
 import { db } from '@/src/lib/db';
 

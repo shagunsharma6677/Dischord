@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server.js';
 import { RegisterSchema } from '../../../../../schemas/index';
 import bcryptjs from 'bcryptjs';
 import { addUser, findByEmail } from '../../../../../data/user';

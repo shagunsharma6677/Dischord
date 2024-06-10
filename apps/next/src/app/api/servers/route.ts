@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import { NextResponse } from 'next/server';
+import { NextResponse } from 'next/server.js';
 import { db } from '../../../lib/db';
 import { currentProfile } from '../../../lib/current-profile';
 import { MemberRole } from '../../../prisma/src/generated/client';
