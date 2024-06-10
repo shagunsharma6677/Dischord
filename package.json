@@ -5,7 +5,7 @@
     "build": "turbo build",
     "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md}\"",
     "prepare": "husky",
     "clean:node_modules": "rm -rf node_modules apps/next/node_modules apps/react/node_modules packages/eslint-config/node_modules packages/tailwind-config/node_modules packages/ui/node_modules ",
     "clean:cache": "rm -rf .turbo apps/next/.next apps/next/.turbo apps/react/.turbo apps/react/.vercel apps/react/dist ",
@@ -27,7 +27,7 @@
     "apps/**/*.{js,jsx,ts,tsx,md,html,css}": "prettier --write",
     "packages/**/*.{js,jsx,ts,tsx,md,html,css}": "prettier --write"
   },
-  "packageManager": "pnpm@9.1.2",
+  "packageManager": "pnpm@9.2.0",
   "engines": {
     "node": ">=18",
     "npm": "Please use pnpm",
