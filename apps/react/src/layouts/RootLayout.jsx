@@ -4,8 +4,8 @@ import NavigationBottomBar from '@/components/Navigation/NavigationBottomBar';
 const RootLayout = ({ children }) => {
   return (
     <div className="dark text-foreground bg-zinc-950 h-screen">
-      <NavigationSidebar />
-      <NavigationBottomBar />
+      {/* <NavigationSidebar /> */}
+      {/* <NavigationBottomBar /> */}
       <div className="flex h-full overflow-hidden">{children}</div>
     </div>
   );
