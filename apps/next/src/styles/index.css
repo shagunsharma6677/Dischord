@@ -1,0 +1,9 @@
+.auth-layout {
+  background-image: url('../../public/dischord-bg.jpg');
+  background-size: '';
+  background-position: right;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
