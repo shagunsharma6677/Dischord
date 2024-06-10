@@ -1,10 +1,10 @@
 'use client';
 
 import { FcGoogle } from 'react-icons/fc';
-import { FaGithub } from 'react-icons/fa';
 import { Button } from '@repo/ui';
 import { signIn } from 'next-auth/react';
 import { DEFAULT_LOGIN_REDIRECT } from '@/routes';
+import { GitHubLogoIcon } from '@radix-ui/react-icons';
 
 export const Social = () => {
   const onClick = (provider: 'google' | 'github') => {
@@ -29,7 +29,7 @@ export const Social = () => {
         variant="outline"
         onClick={() => onClick('github')}
       >
-        <FaGithub className="h-5 w-5" />
+        <GitHubLogoIcon color="black" className="h-5 w-5" />
       </Button>
     </div>
   );

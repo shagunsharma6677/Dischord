@@ -9,6 +9,7 @@ import { ModalProvider } from '../components/providers/ModalProvider';
 import { cn } from '../../../../packages/ui/src/lib/utils';
 import { SocketProvider } from '../components/providers/socket-provider';
 import { QueryProvider } from '../components/providers/query-provider';
+import '../styles/index.css';
 
 const font = Open_Sans({ subsets: ['latin'] });
 

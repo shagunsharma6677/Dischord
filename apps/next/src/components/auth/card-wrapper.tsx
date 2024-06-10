@@ -4,6 +4,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '@repo/ui';
 import Header from './header';
 import { Social } from './social';
 import { BackButton } from './back-button';
+import { cn } from '../../../../../packages/ui/src/lib/utils';
 
 interface CardWrapperProps {
   children: React.ReactNode;
@@ -11,6 +12,7 @@ interface CardWrapperProps {
   backButtonLabel: string;
   backButtonHref: string;
   showSocial?: boolean;
+  className?: string;
 }
 
 const CardWrapper = ({
@@ -19,9 +21,10 @@ const CardWrapper = ({
   backButtonLabel,
   backButtonHref,
   showSocial,
+  className,
 }: CardWrapperProps) => {
   return (
-    <Card className="w-[400px] shadow-md">
+    <Card className={cn('w-[400px]  shadow-md', className)}>
       <CardHeader>
         <Header label={headerLabel} />
       </CardHeader>
@@ -32,7 +35,11 @@ const CardWrapper = ({
         </CardFooter>
       )}
       <CardFooter>
-        <BackButton label={backButtonLabel} href={backButtonHref} />
+        <BackButton
+          className={'text-blue-400'}
+          label={backButtonLabel}
+          href={backButtonHref}
+        />
       </CardFooter>
     </Card>
   );

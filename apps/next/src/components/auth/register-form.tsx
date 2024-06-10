@@ -66,6 +66,7 @@ export const RegisterForm = () => {
       backButtonLabel="Already have an account ??"
       backButtonHref="/auth/login"
       showSocial
+      className={'bg-[#313338]  border-none w-[500px] text-white'}
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -81,6 +82,7 @@ export const RegisterForm = () => {
                       {...field}
                       placeholder="dummy@gmail.com"
                       type="email"
+                      className="bg-neutral-800 focus:border-blue-500 border-[1px] border-zinc-800"
                     />
                   </FormControl>
                   <FormMessage />
@@ -95,7 +97,12 @@ export const RegisterForm = () => {
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="*******" type="password" />
+                    <Input
+                      {...field}
+                      placeholder="*******"
+                      type="password"
+                      className="bg-neutral-800 focus:border-blue-500 border-[1px] border-zinc-800"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -109,7 +116,12 @@ export const RegisterForm = () => {
                 <FormItem>
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="Username" type="text" />
+                    <Input
+                      {...field}
+                      placeholder="Username"
+                      type="text"
+                      className="bg-neutral-800 focus:border-blue-500 border-[1px] border-zinc-800"
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -119,7 +131,10 @@ export const RegisterForm = () => {
           {errorMessage && <FormError message={errorMessage} />}
           {successMessage && <FormSuccess message={successMessage} />}
 
-          <Button type="submit" className="w-full ">
+          <Button
+            type="submit"
+            className="w-full bg-[#7174f1] hover:bg-[#7174f1]  text-white"
+          >
             Create an account
           </Button>
         </form>

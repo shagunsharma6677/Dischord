@@ -80,10 +80,11 @@ export const LoginForm = () => {
   };
   return (
     <CardWrapper
-      headerLabel="Welcome back! 🎉 Happy to see you again!"
+      headerLabel="We are happy to see you back again! 🎉 "
       backButtonLabel="Dont have an account ??"
       backButtonHref="/auth/register"
       showSocial
+      className={'bg-[#313338]  border-none w-[480px] text-white'}
     >
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -100,6 +101,7 @@ export const LoginForm = () => {
                         {...field}
                         disabled={isPending}
                         placeholder="******"
+                        className="bg-neutral-800 focus:border-blue-500 border-[1px] border-zinc-800"
                       />
                     </FormControl>
                     <FormMessage />
@@ -120,6 +122,7 @@ export const LoginForm = () => {
                           {...field}
                           placeholder="dummy@gmail.com"
                           type="email"
+                          className="bg-neutral-800 focus:border-blue-500 border-[1px] border-zinc-800"
                         />
                       </FormControl>
                       <FormMessage />
@@ -138,13 +141,14 @@ export const LoginForm = () => {
                           {...field}
                           placeholder="*******"
                           type="password"
+                          className="bg-neutral-800 focus:border-blue-500 border-[1px] border-zinc-800"
                         />
                       </FormControl>
                       <Button
                         size={'sm'}
                         variant={'link'}
                         asChild
-                        className="px-0 font-normal"
+                        className="px-0 font-normal text-white"
                       >
                         <Link href={'/auth/reset'}>Forgot password?</Link>
                       </Button>
@@ -157,7 +161,10 @@ export const LoginForm = () => {
           </div>
           {errorMessage && <FormError message={errorMessage || urlError} />}
           {successMessage && <FormSuccess message={successMessage} />}
-          <Button type="submit" className="w-full ">
+          <Button
+            type="submit"
+            className="w-full bg-[#7174f1] hover:bg-[#7174f1]  text-white"
+          >
             {showTwoFactor ? 'Confirm' : 'Login'}
           </Button>
         </form>
