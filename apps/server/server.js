@@ -1,33 +1,27 @@
-import express from 'express';
-import initializeRoutes from './app/routes/init.js';
-import { APIError, NotFoundError } from './utils/api-errors.js';
-import { error } from './utils/responseHandlers.js';
 import 'dotenv/config';
+import initializeSocket from './app/services/socker.js';
+import createServer from './utils/create-server.js';
+import { Server as ServerIO } from 'socket.io';
+import { log } from './utils/logger.js';
+import app from './app.js';
 
-const app = express();
-
-// Middleware to parse JSON bodies
-app.use(express.json());
-
-app.get('/', (req, res) => {
-  res.send('Hello World!!');
-});
-
-// Initialize routes
-initializeRoutes(app);
-
-app.use((req, res, next) => {
-  next(new NotFoundError('Page not found'));
-});
-
-app.use((err, req, res, next) => {
-  if (err instanceof APIError) {
-    error(res, err);
-  } else {
-    error(res, new APIError(500, 'Internal Server Error'));
-  }
-});
-
-app.listen(process.env.PORT || 5020, () => {
-  console.log(`Example app listening on port ${process.env.PORT}`);
-});
+createServer(app, process.env.PORT)
+  .then((server) => {
+    log('[3] Server created successfully.');
+    const io = new ServerIO(server, {
+      cors: {
+        origin: '*',
+        methods: ['GET', 'POST'],
+        credentials: true,
+        transports: ['websocket', 'polling'],
+      },
+      allowEIO3: true,
+      // addTrailingSlash: false,
+    });
+    // Initialize Socket.IO functionality
+    initializeSocket(io);
+    log('[4] Socket.IO initialized.');
+  })
+  .catch((error) => {
+    console.error('Error occurred while starting server:', error);
+  });
