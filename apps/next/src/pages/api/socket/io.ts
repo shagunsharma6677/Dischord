@@ -19,6 +19,7 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponseServerIo) => {
         origin: 'http://localhost:3000',
         methods: ['GET', 'POST'],
         credentials: true,
+        // transports: ['websocket', 'polling'],
       },
       // @ts-ignore
       addTrailingSlash: false,

@@ -1,9 +1,7 @@
 .auth-layout {
-  background-image: url('../../public/dischord-bg.jpg');
-  background-size: '';
-  background-position: right;
+  background-image: url('https://theme.zdassets.com/theme_assets/678183/b7e9dce75f9edb23504e13b4699e208f204e5015.png');
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100vw;
+  background-size: cover;
+  background-position: 1480px;
 }

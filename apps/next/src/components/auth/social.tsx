@@ -29,7 +29,7 @@ export const Social = () => {
         variant="outline"
         onClick={() => onClick('github')}
       >
-        <GitHubLogoIcon color="black" className="h-5 w-5" />
+        <GitHubLogoIcon color="white" className="h-5 w-5" />
       </Button>
     </div>
   );

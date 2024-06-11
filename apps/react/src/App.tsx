@@ -1,21 +1,18 @@
-import RootLayout from '@/layouts/RootLayout';
-import ServerSidebar from '@/components/Server/ServerSidebar';
-import Chat from '@/components/Chat/Chat';
-import ChatSidebar from '@/components/Chat/ChatSidebar';
-import './App.css';
 import { Route, Routes } from 'react-router-dom';
-import Login from '@/components/Auth/Login';
+import './App.css';
+import React, { Suspense } from 'react';
+const Login = React.lazy(() => import('./components/Auth/Login'));
+const Dashboard = React.lazy(() => import('./pages/Dashboard'));
+
 function App() {
   return (
-    <RootLayout>
-      {/* <ServerSidebar /> */}
-      {/* <Chat /> */}
-
-      {/* <ChatSidebar /> */}
+    <Suspense fallback={<></>}>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="*" element={<Dashboard />} />
       </Routes>
-    </RootLayout>
+    </Suspense>
   );
 }
 
