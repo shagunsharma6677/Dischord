@@ -35,7 +35,7 @@ export default class Validators {
   static authUserPasswordValidator() {
     try {
       return [
-        check("password")
+        check('password')
           .not()
           .isIn(commonlyUsedPasswords)
           .withMessage('COMMONLY_USED_PASSWORD')

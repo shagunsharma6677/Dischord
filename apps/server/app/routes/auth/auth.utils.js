@@ -1,4 +1,4 @@
-import { db } from '../../../prisma/prisma.js';
+import { db } from '../../../utils/db.js';
 
 export async function findByEmail(email) {
   try {

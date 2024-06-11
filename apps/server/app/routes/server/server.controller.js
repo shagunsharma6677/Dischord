@@ -8,7 +8,7 @@ import {
 } from '../../../utils/api-errors.js';
 import { httpStatus } from '../../../utils/httpStatus.js';
 import { currentProfile } from '../../../utils/helper.js';
-import { db } from '../../../prisma/prisma.js';
+import { db } from '../../../utils/db.js';
 
 export class ServerController extends Controller {
   constructor() {

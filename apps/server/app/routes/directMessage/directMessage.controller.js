@@ -1,5 +1,5 @@
-import { db } from '../../../prisma/prisma.js';
 import { Controller } from '../../../utils/controller-base.js';
+import { db } from '../../../utils/db.js';
 import { currentProfile } from '../../../utils/helper.js';
 
 export class DirectMessageController extends Controller {

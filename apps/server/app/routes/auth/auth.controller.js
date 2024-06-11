@@ -7,7 +7,7 @@ import {
 import {
   sendTwoFactorTokenEmail,
   sendVerificationEmail,
-} from '../../../services/mail.js';
+} from '../../services/mail.js';
 import {
   findByEmail,
   getTwoFactorConfirmationByUserId,

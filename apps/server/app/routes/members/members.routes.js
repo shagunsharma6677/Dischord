@@ -12,4 +12,4 @@ router.patch('/members/:serverId/:memberId', (req, res, next) => {
   return memberObj.editMember();
 });
 
-export default router
+export default router;
