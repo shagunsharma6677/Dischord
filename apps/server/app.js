@@ -3,11 +3,19 @@ import initializeRoutes from './app/routes/init.js';
 import { APIError, NotFoundError } from './utils/api-errors.js';
 import { error } from './utils/responseHandlers.js';
 import { log } from './utils/logger.js';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import morgan from 'morgan';
 
 const app = express();
+app.use(cors({ origin: '*' }));
+
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+app.use(morgan('tiny'));
 
 app.get('/', (req, res) => {
   res.send('Hello World!!');
