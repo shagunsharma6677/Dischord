@@ -7,9 +7,10 @@ import app from './app.js';
 
 createServer(app, process.env.PORT)
   .then((server) => {
-    log('[3] Server created successfully.');
+    log(`[3] Server running on ${process.env.PORT}`);
     const io = new ServerIO(server, {
       cors: {
+        allowedHeaders: ['*'],
         origin: '*',
         methods: ['GET', 'POST'],
         credentials: true,

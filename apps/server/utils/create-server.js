@@ -3,16 +3,16 @@ import https from 'https';
 import { initializeDatabase } from './db.js';
 import { log } from './logger.js';
 
-const createServer = async (app, port = 5030) => {
+const createServer = async (app, port) => {
   let server;
 
   try {
     // Attempt to start HTTPS
-    server = https.createServer(app);
+    server = http.createServer(app);
     server.listen(port, async () => {
       try {
         await initializeDatabase();
-        log('[2] Connected to Prisma Database with https');
+        log('[2] Connected to Prisma Database with http');
       } catch (err) {
         console.error('Failed to connect to Prisma Database:', err);
         process.exit(1); // Terminate process on Prisma connection error
@@ -23,7 +23,7 @@ const createServer = async (app, port = 5030) => {
     console.error('Failed to start HTTPS server:', httpsError);
     // Attempt to start HTTP server if HTTPS fails
     try {
-      server = http.createServer(app);
+      server = https.createServer(app);
       server.listen(port, async () => {
         try {
           await initializeDatabase();
