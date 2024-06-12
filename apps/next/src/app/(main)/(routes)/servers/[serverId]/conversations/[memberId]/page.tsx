@@ -62,10 +62,10 @@ const MemberIdPage = async ({ params, searchParams }: MemberIdPageProps) => {
         serverId={params.serverId}
         type="conversation"
       />
-      {searchParams.video && (
+      {searchParams?.video && (
         <MediaRoom chatId={conversation.id} video={true} audio={true} />
       )}
-      {!searchParams.video && (
+      {!searchParams?.video && (
         <>
           <ChatMessages
             member={currentMember}
