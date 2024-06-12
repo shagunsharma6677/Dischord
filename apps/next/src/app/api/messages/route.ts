@@ -21,7 +21,7 @@ export async function GET(req: Request) {
       return new NextResponse('Channel ID missing', { status: 400 });
     }
 
-    let messages: Message[] = [];
+    let messages: Message[] | any = [];
 
     if (cursor) {
       messages = await db.message.findMany({
