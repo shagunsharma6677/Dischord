@@ -16,7 +16,7 @@ const ioHandler = (req: NextApiRequest, res: NextApiResponseServerIo) => {
     const io = new ServerIO(httpServer, {
       path: path,
       cors: {
-        origin: 'http://localhost:3000',
+        origin: 'http://localhost:5008',
         methods: ['GET', 'POST'],
         credentials: true,
         // transports: ['websocket', 'polling'],
