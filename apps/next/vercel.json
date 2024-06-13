@@ -1,0 +1,11 @@
+
+{
+    "build": {
+      "env": {
+        "YARN": "false",
+        "NPM": "false",
+        "PNPM": "true"
+      }
+    }
+  }
+  
