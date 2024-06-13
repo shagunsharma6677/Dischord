@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
+    "build":"",
     "dev": "pnpx nodemon server.js",
     "test": "nodemon ./prisma/prisma.js",
     "prisma:migrate": "prisma migrate dev --schema=prisma/schema.prisma",
