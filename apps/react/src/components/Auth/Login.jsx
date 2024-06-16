@@ -1,8 +1,11 @@
 import { Button, Checkbox, Input } from '@nextui-org/react';
 import { Lock, MailIcon } from 'lucide-react';
 import React from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 export default function Login() {
+
+  const navigate = useNavigate()
   return (
     <div className="w-full dark text-foreground bg-black h-screen">
       <div className="flex justify-center h-full ">
@@ -51,7 +54,7 @@ export default function Login() {
                   <div className="text-sm text-gray-400">Forgot password</div>
                 </div>
                 <div className="w-full ">
-                  <Button className="w-full rounded-lg" color="default">
+                  <Button onClick={() => navigate("/dashboard")} className="w-full rounded-lg" color="default">
                     Login
                   </Button>
                 </div>
